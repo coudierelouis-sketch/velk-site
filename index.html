@@ -3,61 +3,249 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Velk — Nutrition sportive. Scanne, note, mange mieux.</title>
-  <meta name="description" content="Velk scanne tes aliments et les note sur 100 selon ton objectif sportif : prise de muscle, sèche, maintien ou endurance. Bientôt sur l'App Store." />
+  <title>Velk — Mange comme un athlète. Scanne, note, progresse.</title>
+  <meta name="description" content="Velk scanne n'importe quel aliment et le note sur 100 selon ton objectif sportif : muscle, sèche, maintien ou endurance. Coach IA, voyage à pied, comparateur. Bientôt sur l'App Store." />
+  <meta property="og:title" content="Velk — Nutrition sportive" />
+  <meta property="og:description" content="Scanne un produit, reçois sa note sur 100 selon TON objectif sportif." />
+  <meta property="og:image" content="velk-icon.png" />
   <link rel="icon" type="image/png" href="velk-icon.png" />
   <style>
+    :root {
+      --bg: #09090b; --bg2: #111113; --card: #18181b;
+      --violet: #8B5CFF; --violet2: #5B30D6;
+      --txt: #fff; --sub: #a1a1aa; --muted: #52525b;
+      --green: #34d399; --amber: #f59e0b; --teal: #34E0E0; --gold: #E8C060;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
-      background: #09090b; color: #fff; min-height: 100vh;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 32px 24px; overflow-x: hidden;
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; background: var(--bg); color: var(--txt); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Aurora de fond ── */
+    .aurora { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .aurora i { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .35; animation: drift 16s ease-in-out infinite alternate; }
+    .aurora i:nth-child(1) { width: 46vmax; height: 46vmax; background: var(--violet); top: -18vmax; left: -12vmax; }
+    .aurora i:nth-child(2) { width: 38vmax; height: 38vmax; background: var(--violet2); bottom: -16vmax; right: -10vmax; animation-delay: -8s; opacity: .25; }
+    @keyframes drift { to { transform: translate(6vmax, 4vmax) scale(1.08); } }
+    main { position: relative; z-index: 1; }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between;
+      padding: 14px clamp(20px, 5vw, 56px); background: rgba(9,9,11,.7); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(139,92,255,.15);
     }
-    .glow {
-      position: fixed; width: 70vmax; height: 70vmax; border-radius: 50%;
-      background: radial-gradient(circle, rgba(123,92,255,.22) 0%, transparent 65%);
-      top: -20vmax; left: -15vmax; pointer-events: none;
+    .navbrand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 19px; letter-spacing: -.5px; }
+    .navbrand img { width: 32px; height: 32px; border-radius: 8px; }
+    .navlinks { display: flex; align-items: center; gap: 22px; font-size: 14px; color: var(--sub); }
+    .navlinks a:hover { color: #fff; }
+    .cta-sm { background: linear-gradient(135deg, var(--violet), var(--violet2)); color: #fff !important; padding: 9px 18px; border-radius: 999px; font-weight: 700; box-shadow: 0 8px 24px rgba(123,92,255,.4); }
+
+    /* ── Hero ── */
+    .hero {
+      display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center;
+      max-width: 1100px; margin: 0 auto; padding: clamp(48px, 9vh, 110px) clamp(20px, 5vw, 56px) 70px;
     }
-    .glow.b { top: auto; left: auto; bottom: -30vmax; right: -20vmax; opacity: .6; }
-    .icon {
-      width: 104px; height: 104px; border-radius: 24px;
-      box-shadow: 0 18px 60px rgba(123,92,255,.45); margin-bottom: 28px;
+    .kicker { color: var(--violet); font-size: 13px; font-weight: 800; letter-spacing: 2.6px; text-transform: uppercase; }
+    h1 { font-size: clamp(40px, 6vw, 66px); line-height: 1.04; letter-spacing: -2.5px; font-weight: 800; margin: 16px 0 20px; }
+    h1 em { font-style: normal; background: linear-gradient(120deg, #c4b3ff, var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lead { color: var(--sub); font-size: clamp(16px, 2vw, 19px); line-height: 1.65; max-width: 480px; }
+    .hero-ctas { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; align-items: center; }
+    .cta {
+      display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--violet), var(--violet2));
+      padding: 15px 28px; border-radius: 16px; font-weight: 800; font-size: 16px;
+      box-shadow: 0 16px 44px rgba(123,92,255,.5); transition: transform .15s;
     }
-    h1 { font-size: clamp(40px, 8vw, 64px); letter-spacing: -2px; font-weight: 800; }
-    h1 .dot { color: #8B5CFF; }
-    .tagline { font-size: clamp(17px, 3vw, 21px); color: #a1a1aa; margin-top: 12px; max-width: 520px; line-height: 1.5; }
-    .pill {
-      display: inline-flex; align-items: center; gap: 8px; margin-top: 32px;
-      background: rgba(123,92,255,.14); border: 1px solid rgba(123,92,255,.4);
-      color: #c4b3ff; border-radius: 999px; padding: 10px 20px; font-weight: 600; font-size: 15px;
+    .cta:hover { transform: translateY(-2px) scale(1.02); }
+    .cta .live { width: 8px; height: 8px; border-radius: 50%; background: #fff; animation: pulse 1.8s infinite; }
+    @keyframes pulse { 50% { opacity: .4; transform: scale(.75);} }
+    .cta-ghost { color: var(--sub); font-size: 14.5px; }
+    .cta-ghost:hover { color: #fff; }
+
+    /* ── Mockup iPhone (pur CSS) ── */
+    .phone-wrap { display: flex; justify-content: center; perspective: 1200px; }
+    .phone {
+      width: 300px; border-radius: 46px; background: #050507; padding: 12px;
+      border: 1px solid rgba(139,92,255,.35); box-shadow: 0 40px 100px rgba(0,0,0,.7), 0 0 80px rgba(123,92,255,.25);
+      transform: rotateY(-8deg) rotateX(2deg); animation: float 7s ease-in-out infinite;
     }
-    .pill .dot-live { width: 8px; height: 8px; border-radius: 50%; background: #8B5CFF; animation: pulse 1.8s ease-in-out infinite; }
-    @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1);} 50% { opacity: .5; transform: scale(.8);} }
-    .features { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 36px; max-width: 640px; }
-    .chip { background: #18181b; border: 1px solid rgba(139,92,255,.3); border-radius: 12px; padding: 9px 15px; font-size: 14px; color: #d4d4d8; }
-    footer { margin-top: 56px; font-size: 13px; color: #52525b; line-height: 2; }
-    footer a { color: #8B5CFF; text-decoration: none; }
+    @keyframes float { 50% { transform: rotateY(-8deg) rotateX(2deg) translateY(-12px); } }
+    .screen { border-radius: 36px; background: var(--bg); overflow: hidden; padding: 22px 16px 26px; }
+    .s-kicker { color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: 2px; }
+    .s-title { font-size: 19px; font-weight: 800; letter-spacing: -.7px; margin: 6px 0 16px; }
+    .score-card {
+      border-radius: 20px; border: 1px solid rgba(52,211,153,.4); padding: 16px;
+      background: linear-gradient(135deg, rgba(52,211,153,.16), var(--bg2) 55%, var(--bg));
+      display: flex; align-items: center; gap: 14px; box-shadow: 0 14px 40px rgba(52,211,153,.12);
+    }
+    .ring { position: relative; width: 92px; height: 92px; flex-shrink: 0; }
+    .ring svg { transform: rotate(-90deg); }
+    .ring .track { stroke: rgba(52,211,153,.18); }
+    .ring .fill { stroke: var(--green); stroke-linecap: round; stroke-dasharray: 264; stroke-dashoffset: 264; animation: draw 1.6s .5s cubic-bezier(.16,1,.3,1) forwards; filter: drop-shadow(0 0 8px rgba(52,211,153,.7)); }
+    @keyframes draw { to { stroke-dashoffset: 53; } }
+    .ring b { position: absolute; inset: 0; display: grid; place-content: center; font-size: 26px; letter-spacing: -1px; }
+    .verdict { color: var(--green); font-weight: 800; font-size: 15px; }
+    .s-sub { color: var(--sub); font-size: 11.5px; margin-top: 4px; line-height: 1.5; }
+    .s-chips { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+    .s-chip { font-size: 9.5px; font-weight: 700; padding: 4px 8px; border-radius: 999px; background: rgba(52,211,153,.14); color: var(--green); }
+    .macro-row { display: flex; gap: 10px; margin-top: 14px; }
+    .macro {
+      flex: 1; border-radius: 16px; padding: 12px 10px; text-align: center; border: 1px solid;
+      font-size: 10px; color: var(--sub);
+    }
+    .macro b { display: block; font-size: 17px; letter-spacing: -.5px; color: #fff; margin-bottom: 2px; }
+    .m1 { border-color: rgba(59,130,246,.35); background: linear-gradient(135deg, rgba(59,130,246,.16), var(--bg2)); }
+    .m2 { border-color: rgba(168,85,247,.35); background: linear-gradient(135deg, rgba(168,85,247,.16), var(--bg2)); }
+    .m3 { border-color: rgba(245,158,11,.35); background: linear-gradient(135deg, rgba(245,158,11,.16), var(--bg2)); }
+    .scan-btn {
+      margin-top: 16px; border-radius: 16px; padding: 14px; text-align: center; font-weight: 800; font-size: 13px;
+      background: linear-gradient(135deg, var(--violet), var(--violet2)); box-shadow: 0 12px 30px rgba(123,92,255,.45);
+    }
+
+    /* ── Sections ── */
+    section { max-width: 1100px; margin: 0 auto; padding: 70px clamp(20px, 5vw, 56px); }
+    .sec-kicker { color: var(--violet); font-size: 12px; font-weight: 800; letter-spacing: 2.4px; text-transform: uppercase; }
+    h2 { font-size: clamp(28px, 4vw, 42px); letter-spacing: -1.4px; margin: 12px 0 40px; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .feat {
+      border-radius: 22px; border: 1px solid; padding: 24px; min-height: 170px;
+      display: flex; flex-direction: column; gap: 10px; transition: transform .2s;
+    }
+    .feat:hover { transform: translateY(-4px); }
+    .feat .ic { width: 42px; height: 42px; border-radius: 13px; display: grid; place-content: center; font-size: 20px; }
+    .feat h3 { font-size: 17.5px; letter-spacing: -.4px; }
+    .feat p { color: var(--sub); font-size: 14px; line-height: 1.6; }
+    .f-violet { border-color: rgba(139,92,255,.35); background: linear-gradient(135deg, rgba(139,92,255,.15), var(--bg2) 60%, var(--bg)); }
+    .f-violet .ic { background: rgba(139,92,255,.18); }
+    .f-green { border-color: rgba(52,211,153,.32); background: linear-gradient(135deg, rgba(52,211,153,.13), var(--bg2) 60%, var(--bg)); }
+    .f-green .ic { background: rgba(52,211,153,.16); }
+    .f-teal { border-color: rgba(52,224,224,.32); background: linear-gradient(135deg, rgba(52,224,224,.12), var(--bg2) 60%, var(--bg)); }
+    .f-teal .ic { background: rgba(52,224,224,.14); }
+    .f-gold { border-color: rgba(232,192,96,.32); background: linear-gradient(135deg, rgba(232,192,96,.12), var(--bg2) 60%, var(--bg)); }
+    .f-gold .ic { background: rgba(232,192,96,.15); }
+    .f-amber { border-color: rgba(245,158,11,.32); background: linear-gradient(135deg, rgba(245,158,11,.12), var(--bg2) 60%, var(--bg)); }
+    .f-amber .ic { background: rgba(245,158,11,.15); }
+    .f-blue { border-color: rgba(46,139,255,.32); background: linear-gradient(135deg, rgba(46,139,255,.13), var(--bg2) 60%, var(--bg)); }
+    .f-blue .ic { background: rgba(46,139,255,.15); }
+
+    /* ── Steps ── */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; counter-reset: step; }
+    .step { border-radius: 22px; border: 1px solid rgba(139,92,255,.22); background: var(--bg2); padding: 26px; }
+    .step::before {
+      counter-increment: step; content: "0" counter(step);
+      display: block; font-size: 34px; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 10px;
+      background: linear-gradient(120deg, #c4b3ff, var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .step h3 { font-size: 17px; margin-bottom: 8px; }
+    .step p { color: var(--sub); font-size: 14px; line-height: 1.6; }
+
+    /* ── CTA final ── */
+    .final {
+      text-align: center; border-radius: 28px; padding: 64px 24px; margin: 0 clamp(20px, 5vw, 56px) 70px;
+      max-width: 1100px; margin-left: auto; margin-right: auto;
+      background: linear-gradient(135deg, rgba(139,92,255,.22), var(--bg2) 60%, var(--bg));
+      border: 1px solid rgba(139,92,255,.4); box-shadow: 0 24px 80px rgba(123,92,255,.18);
+    }
+    .final h2 { margin-bottom: 14px; }
+    .final p { color: var(--sub); max-width: 460px; margin: 0 auto 30px; line-height: 1.6; }
+
+    footer { border-top: 1px solid rgba(139,92,255,.15); padding: 36px clamp(20px, 5vw, 56px); text-align: center; color: var(--muted); font-size: 13px; line-height: 2.1; }
+    footer a { color: var(--violet); }
     footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; text-align: center; padding-bottom: 40px; }
+      .lead { margin: 0 auto; }
+      .hero-ctas { justify-content: center; }
+      .phone { transform: none; animation: floatFlat 7s ease-in-out infinite; }
+      @keyframes floatFlat { 50% { transform: translateY(-10px); } }
+      .navlinks span.hide-sm { display: none; }
+    }
   </style>
 </head>
 <body>
-  <div class="glow"></div><div class="glow b"></div>
-  <img class="icon" src="velk-icon.png" alt="Logo Velk" />
-  <h1>Velk<span class="dot">.</span></h1>
-  <p class="tagline">Scanne n'importe quel aliment, reçois sa note sur 100 selon <strong>ton</strong> objectif sportif — muscle, sèche, maintien ou endurance.</p>
-  <div class="pill"><span class="dot-live"></span> Bientôt sur l'App Store</div>
-  <div class="features">
-    <span class="chip">📷 Scan code-barres &amp; photo</span>
-    <span class="chip">🎯 Note selon ton objectif</span>
-    <span class="chip">🗺️ Tes pas deviennent un voyage</span>
-    <span class="chip">🤖 Coach IA hebdomadaire</span>
-    <span class="chip">🇫🇷 Français &amp; English</span>
+<div class="aurora"><i></i><i></i></div>
+<main>
+
+  <nav>
+    <a class="navbrand" href="#"><img src="velk-icon.png" alt="" />Velk<span style="color:var(--violet)">.</span></a>
+    <div class="navlinks">
+      <a href="#features" class="hide-sm"><span class="hide-sm">Fonctionnalités</span></a>
+      <a href="privacy/">Confidentialité</a>
+      <a class="cta-sm" href="#download">App Store</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div>
+      <div class="kicker">Nutrition sportive</div>
+      <h1>Mange comme<br /><em>un athlète.</em></h1>
+      <p class="lead">Scanne n'importe quel aliment : Velk le note sur 100 selon <strong>ton</strong> objectif — prise de muscle, sèche, maintien ou endurance. Verdict clair en une seconde.</p>
+      <div class="hero-ctas">
+        <a class="cta" href="#download"><span class="live"></span> Bientôt sur l'App Store</a>
+        <a class="cta-ghost" href="#how">Comment ça marche ↓</a>
+      </div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone"><div class="screen">
+        <div class="s-kicker">RÉSULTAT DU SCAN</div>
+        <div class="s-title">Blanc de poulet</div>
+        <div class="score-card">
+          <div class="ring">
+            <svg width="92" height="92"><circle class="track" cx="46" cy="46" r="42" fill="none" stroke-width="7"/><circle class="fill" cx="46" cy="46" r="42" fill="none" stroke-width="7"/></svg>
+            <b>80</b>
+          </div>
+          <div>
+            <div class="verdict">Choix élite</div>
+            <div class="s-sub">Parfait pour ta prise de muscle.</div>
+            <div class="s-chips"><span class="s-chip">✓ Riche en protéines</span><span class="s-chip">✓ Peu de sucres</span></div>
+          </div>
+        </div>
+        <div class="macro-row">
+          <div class="macro m1"><b>31g</b>Protéines</div>
+          <div class="macro m2"><b>0g</b>Glucides</div>
+          <div class="macro m3"><b>3g</b>Lipides</div>
+        </div>
+        <div class="scan-btn">📷 &nbsp;Scanner un produit</div>
+      </div></div>
+    </div>
   </div>
+
+  <section id="features">
+    <div class="sec-kicker">Fonctionnalités</div>
+    <h2>Tout ce qu'il faut pour manger utile.</h2>
+    <div class="grid">
+      <div class="feat f-violet"><div class="ic">🎯</div><h3>Une note selon TON objectif</h3><p>Le même produit n'a pas la même valeur pour un marathonien et pour quelqu'un en prise de masse. Velk note pour toi, pas pour la moyenne.</p></div>
+      <div class="feat f-green"><div class="ic">📷</div><h3>Scan code-barres &amp; photo</h3><p>Code-barres, photo d'assiette ou recherche par nom : la note tombe en une seconde, avec points forts et points faibles.</p></div>
+      <div class="feat f-blue"><div class="ic">⚖️</div><h3>Comparateur en rayon</h3><p>Deux produits côte à côte, un gagnant. Fini les hésitations devant le rayon.</p></div>
+      <div class="feat f-teal"><div class="ic">🗺️</div><h3>Tes pas deviennent un voyage</h3><p>Chaque pas te fait avancer sur un vrai trajet — Londres → Paris, et bien d'autres. Carte, étapes, succès.</p></div>
+      <div class="feat f-amber"><div class="ic">🤖</div><h3>Coach IA</h3><p>Un bilan hebdo personnalisé sur ta nutrition et ton activité, avec des conseils concrets, dans le ton que tu choisis.</p></div>
+      <div class="feat f-gold"><div class="ic">🏆</div><h3>Succès &amp; séries</h3><p>Streaks, badges, défis : la régularité devient un jeu. Recettes et frigo intelligent inclus.</p></div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="sec-kicker">Comment ça marche</div>
+    <h2>Trois gestes, zéro prise de tête.</h2>
+    <div class="steps">
+      <div class="step"><h3>Dis ton objectif</h3><p>Muscle, sèche, maintien ou endurance. Velk calcule tes besoins caloriques et tes macros cibles.</p></div>
+      <div class="step"><h3>Scanne</h3><p>Code-barres ou photo. La note sur 100 tombe, personnalisée, avec verdict et alternatives meilleures si besoin.</p></div>
+      <div class="step"><h3>Progresse</h3><p>Suis ton score du jour, tes macros, tes pas transformés en voyage — et garde ta série vivante.</p></div>
+    </div>
+  </section>
+
+  <section class="final" id="download">
+    <h2>Bientôt sur l'App Store<span style="color:var(--violet)">.</span></h2>
+    <p>Velk arrive sur iPhone — et toutes les fonctionnalités seront <strong>gratuites pendant le lancement</strong>. Français &amp; English.</p>
+    <a class="cta" href="mailto:coudierelouis@gmail.com?subject=Velk%20—%20pr%C3%A9venez-moi%20au%20lancement"><span class="live"></span> Être prévenu au lancement</a>
+  </section>
+
   <footer>
     <a href="privacy/">Politique de confidentialité · Privacy Policy</a><br />
     Contact : <a href="mailto:coudierelouis@gmail.com">coudierelouis@gmail.com</a><br />
-    © 2026 Louis Coudiere · Données produits : Open Food Facts (ODbL)
+    © 2026 Louis Coudiere · Données produits : <a href="https://world.openfoodfacts.org" rel="noopener">Open Food Facts</a> (ODbL)
   </footer>
+</main>
 </body>
 </html>
