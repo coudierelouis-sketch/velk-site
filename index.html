@@ -157,6 +157,14 @@
     footer a { color: var(--violet); }
     footer a:hover { text-decoration: underline; }
 
+    /* ── Reveal au scroll (cascade) ── */
+    .rv { opacity: 0; transform: translateY(22px); transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1); }
+    .rv.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .rv { opacity: 1; transform: none; transition: none; }
+      .phone, .aurora i, .cta .live { animation: none !important; }
+    }
+
     @media (max-width: 860px) {
       .hero { grid-template-columns: 1fr; text-align: center; padding-bottom: 40px; }
       .lead { margin: 0 auto; }
@@ -180,17 +188,17 @@
     </div>
   </nav>
 
-  <div class="hero">
-    <div>
-      <div class="kicker">Coach nutrition &amp; sport</div>
-      <h1>Mange comme<br /><em>un athlète.</em></h1>
-      <p class="lead">Velk note chaque aliment sur 100 selon <strong>ton</strong> objectif — muscle, sèche, maintien, endurance — puis suit tes macros, tes séances et ton poids. Et chaque semaine, ton coach IA fait le bilan.</p>
-      <div class="hero-ctas">
+  <div class="hero stagger">
+    <div class="stagger">
+      <div class="kicker rv">Coach nutrition &amp; sport</div>
+      <h1 class="rv">Mange comme<br /><em>un athlète.</em></h1>
+      <p class="lead rv">Tu scannes un aliment, Velk te dit s'il sert ton objectif : une note sur 100, un verdict clair. Ensuite il suit tes macros, ton eau, tes séances, ton poids. Et chaque semaine, ton coach fait le point avec toi.</p>
+      <div class="hero-ctas rv">
         <a class="cta" href="#download"><span class="live"></span> Bientôt sur l'App Store</a>
         <a class="cta-ghost" href="#how">Comment ça marche ↓</a>
       </div>
     </div>
-    <div class="phone-wrap">
+    <div class="phone-wrap rv">
       <div class="phone"><div class="screen">
         <div class="s-kicker">RÉSULTAT DU SCAN</div>
         <div class="s-title">Blanc de poulet</div>
@@ -216,29 +224,29 @@
   </div>
 
   <section id="features">
-    <div class="sec-kicker">Fonctionnalités</div>
-    <h2>Un vrai coach, pas juste un scanner.</h2>
+    <div class="sec-kicker rv">Fonctionnalités</div>
+    <h2 class="rv">Un vrai coach, pas juste un scanner.</h2>
     <div class="grid">
-      <div class="feat f-violet"><div class="ic">🎯</div><h3>Une note selon TON objectif</h3><p>Le même produit n'a pas la même valeur pour un marathonien et pour quelqu'un en prise de masse. Velk note pour toi, pas pour la moyenne.</p></div>
-      <div class="feat f-blue"><div class="ic">📷</div><h3>Scan, photo &amp; comparateur</h3><p>Code-barres, photo d'assiette ou recherche par nom : verdict en une seconde. Et en rayon, deux produits côte à côte, un gagnant.</p></div>
-      <div class="feat f-amber"><div class="ic">🤖</div><h3>Un coach IA qui te connaît</h3><p>Bilan hebdomadaire personnalisé sur ta nutrition ET ton entraînement : ce qui a marché, quoi corriger, des conseils concrets — dans le ton que tu choisis.</p></div>
-      <div class="feat f-green"><div class="ic">🍳</div><h3>Recettes &amp; frigo intelligent</h3><p>120+ recettes calibrées pour ton objectif, en swipe ou filtrées par régime. Scanne ton ticket de courses : Velk sait ce qu'il y a dans ton frigo et quoi en faire.</p></div>
-      <div class="feat f-teal"><div class="ic">📊</div><h3>Ton tableau de bord nutrition</h3><p>Score du jour, macros en anneaux, historique 7 jours, courbe de poids : tu vois ta semaine d'un coup d'œil, et tes cibles s'ajustent à tes séances.</p></div>
-      <div class="feat f-gold"><div class="ic">🏋️</div><h3>Le sport compte aussi</h3><p>Tes sports parmi 60 disciplines, conseils avant/après séance, activité et pas suivis — jusqu'à transformer tes pas en voyage sur la carte, succès et séries à la clé.</p></div>
+      <div class="feat f-violet rv"><div class="ic">🎯</div><h3>Une note selon TON objectif</h3><p>Le même produit n'a pas la même valeur pour un marathonien et pour quelqu'un en prise de masse. Velk note pour toi, pas pour la moyenne.</p></div>
+      <div class="feat f-blue rv"><div class="ic">📷</div><h3>Scan, photo &amp; comparateur</h3><p>Code-barres, photo d'assiette ou recherche par nom : verdict en une seconde. Devant le rayon, tu compares deux produits et tu prends le bon.</p></div>
+      <div class="feat f-amber rv"><div class="ic">🤖</div><h3>Un coach qui te connaît</h3><p>Il connaît ton objectif et tes sports. Chaque semaine il te dit ce qui a marché, quoi corriger, et par quoi commencer demain matin. Pas de banalités.</p></div>
+      <div class="feat f-green rv"><div class="ic">🍳</div><h3>Recettes &amp; frigo intelligent</h3><p>120 recettes calibrées pour ton objectif, à swiper. T'hésites ? Velk choisit ton repas du soir. Tu planifies ? Il génère la liste de courses de toute ta semaine. Et il sait ce qu'il y a dans ton frigo.</p></div>
+      <div class="feat f-teal rv"><div class="ic">📊</div><h3>Ta journée d'un coup d'œil</h3><p>Score du jour, macros, hydratation, poids. Tes cibles s'ajustent toutes seules les jours de séance.</p></div>
+      <div class="feat f-gold rv"><div class="ic">🏋️</div><h3>Le sport compte aussi</h3><p>Tes sports parmi 60 disciplines, chrono de séance avec repos entre les séries, conseils avant/après. Et tes pas s'additionnent — jusqu'à devenir un voyage Londres → Paris sur la carte.</p></div>
     </div>
   </section>
 
   <section id="how">
-    <div class="sec-kicker">Comment ça marche</div>
-    <h2>Trois gestes, zéro prise de tête.</h2>
+    <div class="sec-kicker rv">Comment ça marche</div>
+    <h2 class="rv">Trois gestes, zéro prise de tête.</h2>
     <div class="steps">
-      <div class="step"><h3>Dis ton objectif</h3><p>Muscle, sèche, maintien ou endurance. Velk calcule tes besoins caloriques et tes macros cibles.</p></div>
-      <div class="step"><h3>Scanne &amp; mange juste</h3><p>Code-barres ou photo : la note sur 100 tombe, personnalisée. Recettes et comparateur pour toujours avoir un meilleur choix sous la main.</p></div>
-      <div class="step"><h3>Progresse, coaché</h3><p>Score du jour, macros, poids, séances : tout est suivi. Et chaque semaine, ton coach IA fait le point et te dit quoi ajuster.</p></div>
+      <div class="step rv"><h3>Dis qui tu es</h3><p>Ton objectif — muscle, sèche, maintien, endurance — et les sports que tu pratiques. Velk calcule tes calories et tes macros cibles.</p></div>
+      <div class="step rv"><h3>Scanne &amp; mange juste</h3><p>Code-barres ou photo : la note tombe, personnalisée. Et quand tu ne sais pas quoi manger, les recettes s'en chargent.</p></div>
+      <div class="step rv"><h3>Progresse, coaché</h3><p>Score du jour, eau, poids, séances au chrono : tout est suivi. Chaque semaine, ton coach te dit quoi ajuster.</p></div>
     </div>
   </section>
 
-  <section class="final" id="download">
+  <section class="final rv" id="download">
     <h2>Bientôt sur l'App Store<span style="color:var(--violet)">.</span></h2>
     <p>Velk arrive sur iPhone — et toutes les fonctionnalités seront <strong>gratuites pendant le lancement</strong>. Français &amp; English.</p>
     <a class="cta" href="mailto:coudierelouis@gmail.com?subject=Velk%20—%20pr%C3%A9venez-moi%20au%20lancement"><span class="live"></span> Être prévenu au lancement</a>
@@ -250,5 +258,40 @@
     © 2026 Louis Coudiere · Données produits : <a href="https://world.openfoodfacts.org" rel="noopener">Open Food Facts</a> (ODbL)
   </footer>
 </main>
+<script>
+(function () {
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var els = document.querySelectorAll(".rv");
+  // Cascade au sein d'un même groupe (hero, grille, étapes)
+  document.querySelectorAll(".stagger, .grid, .steps").forEach(function (g) {
+    var i = 0;
+    g.querySelectorAll(":scope > .rv").forEach(function (c) { c.style.transitionDelay = (i++ * 90) + "ms"; });
+  });
+  if (reduce || !("IntersectionObserver" in window)) {
+    els.forEach(function (e) { e.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.classList.add("in");
+        io.unobserve(en.target);
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+    els.forEach(function (e) { io.observe(e); });
+  }
+  // Le score du mockup compte jusqu'à 80, synchronisé avec l'anneau qui se remplit.
+  var b = document.querySelector(".ring b");
+  if (b && !reduce) {
+    var t0 = performance.now() + 500;
+    var tick = function (now) {
+      var p = Math.min(1, (now - t0) / 1600);
+      if (p > 0) b.textContent = Math.round(80 * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    b.textContent = "0";
+    requestAnimationFrame(tick);
+  }
+})();
+</script>
 </body>
 </html>
