@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /confirmed/
+
+Sitemap: https://velkapp.com/sitemap.xml
