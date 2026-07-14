@@ -32,7 +32,7 @@
   <div class="brand"><img src="../velk-icon.png" alt="Velk" /><span>Velk.</span></div>
 
   <h1>Politique de confidentialité</h1>
-  <p class="updated">Dernière mise à jour : 4 juillet 2026 · <a href="#english">English version below ↓</a></p>
+  <p class="updated">Dernière mise à jour : 14 juillet 2026 · <a href="#english">English version below ↓</a></p>
 
   <div class="toc">Velk est édité par Louis Coudiere (éditeur indépendant, France). Cette politique décrit les données traitées par l'application mobile Velk et le site velk.</div>
 
@@ -42,33 +42,44 @@
     <li><strong>Profil</strong> : prénom, sexe, âge, poids, taille, niveau d'activité, objectif sportif — pour calculer tes besoins caloriques et personnaliser les scores.</li>
     <li><strong>Activité alimentaire</strong> : historique des produits scannés et aliments suivis.</li>
     <li><strong>Santé (lecture seule, avec ta permission)</strong> : pas, distance, énergie active via Apple Santé (HealthKit). Ces données ne quittent l'appareil que sous forme agrégée pour tes statistiques ; elles ne sont jamais vendues ni utilisées à des fins publicitaires. Apple interdit — et nous n'y dérogeons pas — tout usage des données HealthKit pour la publicité.</li>
-    <li><strong>Photos (analyse IA)</strong> : si tu photographies un repas, un ticket de caisse ou ton visage pour analyse, l'image est envoyée à nos serveurs pour être analysée puis <strong>n'est pas conservée</strong>.</li>
+    <li><strong>Photos (analyse IA)</strong> : si tu photographies un repas, un ticket de caisse ou ton visage pour analyse, l'image est envoyée à nos serveurs puis à notre prestataire d'IA Anthropic (voir section 2), après ton consentement explicite dans l'app, puis <strong>n'est pas conservée</strong>.</li>
     <li><strong>Mesure d'audience &amp; crashs (optionnel)</strong> : statistiques d'usage (PostHog) et rapports de crash (Sentry), <strong>uniquement si tu y consens</strong> à la première ouverture. Tu peux retirer ce consentement à tout moment dans Profil → Confidentialité.</li>
     <li><strong>Achats</strong> : si des abonnements sont proposés, leur statut est géré par Apple et RevenueCat ; nous ne voyons jamais tes informations bancaires.</li>
   </ul>
 
-  <h2>2. Ce que nous ne faisons pas</h2>
+  <h2>2. Analyse par intelligence artificielle (Anthropic)</h2>
+  <p>Certaines fonctionnalités s'appuient sur l'IA <strong>Claude</strong> de notre prestataire <strong>Anthropic</strong>. Les données transitent par nos serveurs sécurisés (Supabase, UE) — jamais directement de ton appareil vers Anthropic. Données concernées, par fonctionnalité :</p>
+  <ul>
+    <li><strong>Scan de repas</strong> : ta photo d'assiette, pour estimer calories et macronutriments.</li>
+    <li><strong>Scan de visage</strong> : ta photo de visage, pour estimer ta composition corporelle.</li>
+    <li><strong>Scan de ticket de caisse</strong> : ta photo de ticket, pour remplir automatiquement ton frigo.</li>
+    <li><strong>Coach</strong> : ton prénom, ton objectif, tes sports et tes moyennes nutritionnelles de la semaine, pour générer des conseils personnalisés.</li>
+    <li><strong>Estimation nutritionnelle</strong> : le nom d'un produit scanné introuvable dans les bases publiques (aucune donnée personnelle).</li>
+  </ul>
+  <p>Dans tous les cas : l'app te demande un <strong>consentement explicite avant le premier envoi</strong> de chaque fonctionnalité, et tu peux refuser — la fonctionnalité est alors désactivée ou fonctionne en mode local. Ces données servent <strong>uniquement</strong> à produire l'analyse demandée ; elles ne sont <strong>pas conservées</strong> par Anthropic, <strong>pas utilisées pour entraîner des modèles d'IA</strong>, et jamais utilisées à des fins publicitaires ni revendues.</p>
+
+  <h2>3. Ce que nous ne faisons pas</h2>
   <ul>
     <li>Pas de publicité, pas de tracking publicitaire, pas de revente de données.</li>
     <li>Pas de partage avec des tiers en dehors des sous-traitants listés ci-dessous.</li>
   </ul>
 
-  <h2>3. Où sont hébergées les données</h2>
-  <p>Les données de compte et d'activité sont hébergées chez <strong>Supabase</strong> (région Union européenne — eu-west-1). Les analyses IA sont réalisées via l'API Anthropic. Sous-traitants : Supabase (base de données &amp; auth), Anthropic (analyse IA, sans conservation), PostHog (statistiques, opt-in), Sentry (crashs, opt-in), RevenueCat &amp; Apple (achats).</p>
+  <h2>4. Où sont hébergées les données</h2>
+  <p>Les données de compte et d'activité sont hébergées chez <strong>Supabase</strong> (région Union européenne — eu-west-1). Les analyses IA sont réalisées via l'API Anthropic (voir section 2). Sous-traitants : Supabase (base de données &amp; auth), Anthropic (analyse IA, sans conservation), PostHog (statistiques, opt-in), Sentry (crashs, opt-in), RevenueCat &amp; Apple (achats).</p>
 
-  <h2>4. Tes droits (RGPD)</h2>
+  <h2>5. Tes droits (RGPD)</h2>
   <p>Tu peux consulter, corriger ou supprimer tes données. La <strong>suppression complète du compte</strong> se fait directement dans l'app : Profil → Supprimer le compte (double confirmation, effacement des données serveur et locales). Pour toute demande : <a href="mailto:coudierelouis@gmail.com">coudierelouis@gmail.com</a>.</p>
 
-  <h2>5. Durée de conservation</h2>
+  <h2>6. Durée de conservation</h2>
   <p>Tes données sont conservées tant que ton compte existe, et supprimées lors de la suppression du compte.</p>
 
-  <h2>6. Contact</h2>
+  <h2>7. Contact</h2>
   <p>Louis Coudiere — <a href="mailto:coudierelouis@gmail.com">coudierelouis@gmail.com</a></p>
 
   <hr class="lang-sep" id="english" />
 
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: July 4, 2026</p>
+  <p class="updated">Last updated: July 14, 2026</p>
 
   <div class="toc">Velk is published by Louis Coudiere (independent developer, France). This policy describes the data processed by the Velk mobile app and website.</div>
 
@@ -78,27 +89,38 @@
     <li><strong>Profile</strong>: first name, sex, age, weight, height, activity level, sports goal — used to compute your calorie needs and personalize scores.</li>
     <li><strong>Food activity</strong>: history of scanned products and tracked foods.</li>
     <li><strong>Health (read-only, with your permission)</strong>: steps, distance and active energy via Apple Health (HealthKit). This data only leaves your device in aggregated form for your own statistics; it is never sold nor used for advertising. Apple prohibits — and we fully comply — any use of HealthKit data for advertising purposes.</li>
-    <li><strong>Photos (AI analysis)</strong>: if you photograph a meal, a receipt or your face for analysis, the image is sent to our servers for processing and is <strong>not stored</strong>.</li>
+    <li><strong>Photos (AI analysis)</strong>: if you photograph a meal, a receipt or your face for analysis, the image is sent to our servers and then to our AI provider Anthropic (see section 2), after your explicit in-app consent, and is <strong>not stored</strong>.</li>
     <li><strong>Analytics &amp; crash reports (optional)</strong>: usage statistics (PostHog) and crash reports (Sentry), <strong>only if you consent</strong> on first launch. You can withdraw consent anytime in Profile → Privacy.</li>
     <li><strong>Purchases</strong>: if subscriptions are offered, their status is handled by Apple and RevenueCat; we never see your payment details.</li>
   </ul>
 
-  <h2>2. What we don't do</h2>
+  <h2>2. Artificial intelligence analysis (Anthropic)</h2>
+  <p>Some features rely on <strong>Claude</strong>, the AI of our provider <strong>Anthropic</strong>. Data goes through our secured servers (Supabase, EU) — never directly from your device to Anthropic. Data involved, per feature:</p>
+  <ul>
+    <li><strong>Meal scan</strong>: your plate photo, to estimate calories and macronutrients.</li>
+    <li><strong>Face scan</strong>: your face photo, to estimate your body composition.</li>
+    <li><strong>Receipt scan</strong>: your receipt photo, to fill your fridge automatically.</li>
+    <li><strong>Coach</strong>: your first name, your goal, your sports and your weekly nutrition averages, to generate personalized advice.</li>
+    <li><strong>Nutrition estimation</strong>: the name of a scanned product missing from public databases (no personal data).</li>
+  </ul>
+  <p>In every case: the app asks for your <strong>explicit consent before the first send</strong> of each feature, and you can decline — the feature is then disabled or runs locally. This data is used <strong>only</strong> to produce the requested analysis; it is <strong>not retained</strong> by Anthropic, <strong>not used to train AI models</strong>, and never used for advertising or sold.</p>
+
+  <h2>3. What we don't do</h2>
   <ul>
     <li>No ads, no ad tracking, no selling of data.</li>
     <li>No sharing with third parties beyond the processors listed below.</li>
   </ul>
 
-  <h2>3. Where your data lives</h2>
-  <p>Account and activity data are hosted on <strong>Supabase</strong> (European Union region — eu-west-1). AI analyses run through the Anthropic API. Processors: Supabase (database &amp; auth), Anthropic (AI analysis, no retention), PostHog (analytics, opt-in), Sentry (crashes, opt-in), RevenueCat &amp; Apple (purchases).</p>
+  <h2>4. Where your data lives</h2>
+  <p>Account and activity data are hosted on <strong>Supabase</strong> (European Union region — eu-west-1). AI analyses run through the Anthropic API (see section 2). Processors: Supabase (database &amp; auth), Anthropic (AI analysis, no retention), PostHog (analytics, opt-in), Sentry (crashes, opt-in), RevenueCat &amp; Apple (purchases).</p>
 
-  <h2>4. Your rights (GDPR)</h2>
+  <h2>5. Your rights (GDPR)</h2>
   <p>You may access, correct or delete your data. <strong>Full account deletion</strong> is available directly in the app: Profile → Delete account (double confirmation, erases server and local data). For any request: <a href="mailto:coudierelouis@gmail.com">coudierelouis@gmail.com</a>.</p>
 
-  <h2>5. Retention</h2>
+  <h2>6. Retention</h2>
   <p>Your data is kept as long as your account exists, and deleted when the account is deleted.</p>
 
-  <h2>6. Contact</h2>
+  <h2>7. Contact</h2>
   <p>Louis Coudiere — <a href="mailto:coudierelouis@gmail.com">coudierelouis@gmail.com</a></p>
 
   <p style="margin-top:48px"><a href="../">← Velk</a></p>
